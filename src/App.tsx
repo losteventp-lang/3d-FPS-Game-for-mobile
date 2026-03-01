@@ -123,8 +123,8 @@ export default function App() {
     // Mouse look (Desktop)
     const onMouseMove = (e: MouseEvent) => {
       if (document.pointerLockElement === renderer.domElement) {
-        player.rotation.y -= e.movementX * 0.002;
-        camera.rotation.x -= e.movementY * 0.002;
+        player.rotation.y -= e.movementX * 0.004;
+        camera.rotation.x -= e.movementY * 0.004;
         camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
       }
     };
@@ -155,11 +155,11 @@ export default function App() {
         
         const moveDir = new THREE.Vector3(moveX, 0, moveZ).normalize();
         moveDir.applyQuaternion(player.quaternion);
-        player.position.add(moveDir.multiplyScalar(10 * delta));
+        player.position.add(moveDir.multiplyScalar(15 * delta));
 
         // Look (Mobile)
-        player.rotation.y += lookInput.current.x * 2 * delta;
-        camera.rotation.x += lookInput.current.y * 2 * delta;
+        player.rotation.y += lookInput.current.x * 4 * delta;
+        camera.rotation.x += lookInput.current.y * 4 * delta;
         camera.rotation.x = Math.max(-Math.PI / 2, Math.min(Math.PI / 2, camera.rotation.x));
 
         // Spawn enemies
@@ -303,7 +303,7 @@ export default function App() {
               </button>
               <Joystick 
                 label="Look"
-                onMove={(x, y) => { lookInput.current = { x: x * 0.5, y: y * 0.5 }; }}
+                onMove={(x, y) => { lookInput.current = { x: x * 1.5, y: y * 1.5 }; }}
                 onEnd={() => { lookInput.current = { x: 0, y: 0 }; }}
               />
             </div>
